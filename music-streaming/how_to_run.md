@@ -10,3 +10,8 @@ Make sure you have Node.js installed, then run:
 
 ```bash
 npm install
+
+## 3. Run the `index.js`
+
+```bash
+node index.js
