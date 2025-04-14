@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Streaming</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="player-container">
+    <div class="player-header">
+      <h1><i class="fa-solid fa-music"></i> Music Streaming</h1>
+    </div>
+
+    <div class="album-art">
+      <div class="visualizer" id="visualizer"></div>
+      <div class="buffering-overlay" id="bufferingOverlay">
+        <div class="spinner"></div>
+        <span>Buffering...</span>
+      </div>
+    </div>
+
+    <div class="now-playing-info">
+      <div class="now-playing" id="nowPlaying">Select a song to play</div>
+      <div class="artist" id="artist">-</div>
+    </div>
+
+    <div class="progress-container">
+      <span id="currentTime">0:00</span>
+      <div class="progress-bar">
+        <div class="progress-bg"></div>
+        <div class="progress-fill" id="progressFill"></div>
+        <input type="range" id="seekSlider" min="0" max="100" value="0">
+      </div>
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn" class="control-btn">
+        <i class="fa-solid fa-backward-step"></i>
+      </button>
+      <button id="playBtn" class="control-btn play-btn">
+        <i class="fa-solid fa-play" id="playIcon"></i>
+      </button>
+      <button id="nextBtn" class="control-btn">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+      <div class="volume-container">
+        <i class="fa-solid fa-volume-high"></i>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+      </div>
+    </div>
+
+    <div class="playlist-container">
+      <h2>Playlist</h2>
+      <ul class="playlist" id="playlist"></ul>
+    </div>
+
+    <div class="network-debug" id="networkDebug">
+      <div class="debug-header">Network Activity</div>
+      <div class="debug-content" id="debugContent"></div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer"></audio>
+  
+  <script src="player.js" type="module"></script>
+</body>
+</html>
