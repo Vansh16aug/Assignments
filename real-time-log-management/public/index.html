@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSE</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+      #output {
+        margin-top: 1rem;
+        border: 1px solid #ccc;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Server-Sent Events</h1>
+    <div id="output">Waiting for messages...</div>
+
+    <script>
+      const output = document.getElementById("output");
+      const eventSource = new EventSource("http://localhost:3000/stream");
+      eventSource.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        output.innerHTML += `<p>Server time:${data.time}</p>`;
+      };
+
+      eventSource.onerror = () => {
+        output.innerHTML += "<p>Connection closed</p>";
+        eventSource.close();
+      };
+    </script>
+  </body>
+</html>
