@@ -18,7 +18,7 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.REDIRECT_URI
 );
 
-// 🔐 Google Auth URL
+// Google Auth URL
 app.get("/auth", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
@@ -31,7 +31,7 @@ app.get("/auth", (req, res) => {
   res.redirect(url);
 });
 
-// 🔄 Handle Auth Callback
+// Handle Auth Callback
 app.get("/auth/callback", async (req, res) => {
   try {
     const { tokens } = await oauth2Client.getToken(req.query.code);
@@ -48,7 +48,7 @@ app.get("/auth/callback", async (req, res) => {
   }
 });
 
-// ✅ Helper: Set credentials from cookies
+// Helper: Set credentials from cookies
 function setCredentials(req) {
   if (req.cookies.access_token) {
     oauth2Client.setCredentials({
@@ -60,7 +60,7 @@ function setCredentials(req) {
   return false;
 }
 
-// 📅 Get Upcoming Events
+// Get Upcoming Events
 app.get("/events", async (req, res) => {
   if (!setCredentials(req))
     return res.status(401).json({ error: "Login required" });
@@ -77,7 +77,7 @@ app.get("/events", async (req, res) => {
   res.json(data.items);
 });
 
-// ➕ Create a New Event
+// Create a New Event
 app.post("/create-event", async (req, res) => {
   if (!setCredentials(req))
     return res.status(401).json({ error: "Login required" });
@@ -110,12 +110,12 @@ app.post("/create-event", async (req, res) => {
   res.json(data);
 });
 
-// 🔍 Check Login Status
+//Check Login Status
 app.get("/status", (req, res) => {
   res.json({ loggedIn: !!req.cookies.access_token });
 });
 
-// 🚪 Logout
+//Logout
 app.get("/logout", (req, res) => {
   res.clearCookie("access_token");
   res.clearCookie("refresh_token");
